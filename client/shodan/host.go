@@ -30,6 +30,8 @@ type Host struct {
 	Domains   []string     `json:"domains"`
 	Org       string       `json:"org"`
 	Data      string       `json:"data`
+	Port      int          `json:"port"`
+	IPString  string       `json:"ip_str"`
 }
 
 type HostSearch struct {
@@ -38,7 +40,7 @@ type HostSearch struct {
 
 func (s *Client) HostSearch(q string) (*HostSearch, error) {
 	res, err := http.Get(
-		fmt.Sprintf("%s/shodan/host/search?key%s&query=%s", BaseURL, s.apiKey, q),
+		fmt.Sprintf("%s/shodan/host/search?key=%s&query=%s", BaseURL, s.apiKey, q),
 	)
 	if err != nil {
 		return nil, err
